@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Google Map</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>WittyFeed Headquarters</h1>
+<div id="map"></div>
+
+
+<script>
+    function initMap() {
+
+        // Map Options
+        var options = {
+            zoom: 14,
+            center: {
+                lat: 22.7196,
+                lng: 75.8577
+            }
+        };
+
+        // New map
+        var map = new google.maps.Map(document.getElementById('map'), options);
+
+        // New Marker
+        var marker = new google.maps.Marker({
+            position: {
+                lat: 22.7228,
+                lng: 75.8869
+            },
+            map: map,
+            icon: 'https://cdn.wittyfeed.com/assets/images/fevicon.ico'
+        });
+
+        // Info Window
+        var infoWindow = new google.maps.InfoWindow({
+            content: '<h3>WittyFeed HeadQuarters</h3>'
+        });
+
+        // Listener for click on marker
+        marker.addListener('click', function () {
+            infoWindow.open(map, marker);
+        });
+
+        google.maps.addEventListener(map, 'click', function (event) {
+            // add marker
+            addMarker();
+        });
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA3NWKEsTT4cwdFMFc9qeSevCjnlXGbl0&callback=initMap"
+        async defer></script>
+</body>
+</html>
